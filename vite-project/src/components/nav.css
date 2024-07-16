@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Annie+Use+Your+Telescope&display=swap');
+
+*{
+    font-family: "Annie Use Your Telescope", cursive;
+}
+
+body{
+    background-color: black;
+}
+
+nav{
+  height: 5rem;
+  width: 70%;
+  background-color: rgba(128, 128, 128, 0.959);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+.navSection div{
+  font-size: x-large;
+}
+ 
+.bit-icon{
+  flex: 1;
+  display: flex;
+  padding-left: 1rem;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.coin{
+  color: orangered;
+}
+
+.about{
+  flex: 1;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  gap: .5rem;
+  }
+
+.push-coin{
+  flex: 1;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  gap: .5rem;
+}
+
+.ham{
+  padding-right: 1rem;
+  color: #fff;
+}
+  
+.coin-text{
+  color: orangered;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.first-section{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-top: 8rem;
+  gap: 3rem;
+}
+
+.coin-text h3{
+  font-size: 1.5rem;
+  margin-top: -1.6rem;
+}
+
+.text{
+  font-weight: lighter;
+}
+
+.close{
+  color: #fff;
+  display: none;
+}
