@@ -54,33 +54,3 @@ nav{
   padding-right: 1rem;
   color: #fff;
 }
-  
-.coin-text{
-  color: orangered;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  margin-top: 1rem;
-}
-
-.first-section{
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  margin-top: 8rem;
-  gap: 3rem;
-}
-
-.coin-text h3{
-  font-size: 1.5rem;
-  margin-top: -1.6rem;
-}
-
-.text{
-  font-weight: lighter;
-}
-
-.close{
-  color: #fff;
-  display: none;
-}
