@@ -1,0 +1,28 @@
+.home-section{
+    display: grid;
+    grid-template-columns: 40% 60%;
+    width: 70%;
+    margin: auto;
+    margin-top: 6rem;
+    gap: 3vw;
+}
+
+.home-content h1{
+    color: orangered;
+    text-align: center;
+}
+
+.home-content span{
+    font-weight: lighter;
+}
+
+.home-img{
+    width: 100%;
+    height: 100%;
+}
+
+.home-img img{
+    height: 100%;
+    width: 100%;
+    object-fit: fill;
+}
