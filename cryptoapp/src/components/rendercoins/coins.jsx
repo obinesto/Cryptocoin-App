@@ -1,22 +1,23 @@
-import './coins.css'
+import "./coins.css";
 
 const coins = () => {
+
   return (
     <>
-    <div className="coin-header">
+      <div className="coin-header">
         <h2>Authoried coins with current rate</h2>
-    </div>
+      </div>
 
-    <ul className='list-container'>
+      <ul className="list-container">
         <li>#</li>
         <li>Coin</li>
         <li>Price</li>
         <li>24h</li>
         <li>Volume</li>
         <li>Mrkt Cap</li>
-    </ul>
+      </ul>
     </>
-  )
-}
+  );
+};
 
-export default coins
+export default coins;

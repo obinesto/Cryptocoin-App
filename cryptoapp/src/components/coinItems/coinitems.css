@@ -1,0 +1,30 @@
+.coins-container{
+    display: flex;
+    justify-content: space-between;
+    margin: 0 10rem;
+    padding-top: 1rem;
+    padding-left: 2.8rem;
+    padding-right: .5rem;
+    background-color: #2b2b2b;
+    height: 5vh;
+    border-radius: .5rem;
+    align-content: center;
+    margin-top: 1rem;
+}
+
+.coins-container div{
+    color: white;
+    width: -moz-fit-content;
+    width: fit-content;
+    height: 4vh;
+}
+
+.coins-container div img{
+    height: 100%;
+}
+
+.coins-img-container{
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
