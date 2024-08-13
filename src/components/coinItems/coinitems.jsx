@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import './coinitems.css';
 import axios from "axios";
-
 const apiUrl = import.meta.env.VITE_API_URL;
 
 const CoinItems = () => {
