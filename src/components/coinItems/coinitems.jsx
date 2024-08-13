@@ -16,7 +16,6 @@ const CoinItems = () => {
             });
     }, []);
 
-
     return (
         <div>
             {coins.map((data, index) => (
