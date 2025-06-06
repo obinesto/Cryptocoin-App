@@ -1,0 +1,330 @@
+@import url("https://fonts.googleapis.com/css2?family=Annie+Use+Your+Telescope&display=swap");
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: black;
+  font-family: "Annie Use Your Telescope", cursive;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* nav section */
+.non-mobile-nav-section,
+.mobile-nav-section {
+  width: 90%;
+  margin: auto;
+  background-color: #2b2828;
+  color: white;
+  border-radius: 0.5rem;
+  height: 8vh;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+}
+
+.non-mobile-nav-section {
+  display: flex;
+}
+
+.mobile-nav-section {
+  display: none;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 10%;
+  left: 2%;
+  width: 20%;
+  gap: 1rem;
+  background-color: #2b2828;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  font-size: small;
+}
+
+@media (max-width: 768px) {
+  .non-mobile-nav-section {
+    display: none;
+  }
+  .mobile-nav-section {
+    display: flex;
+  }
+}
+
+.coin-logo {
+  display: flex;
+  align-items: center;
+  gap: 1vw;
+  color: white;
+}
+
+.coin-text {
+  color: orangered;
+}
+
+.about,
+.auth {
+  display: flex;
+  align-items: center;
+  gap: 0.5vw;
+  color: white;
+}
+
+/* home content section */
+.home-section {
+  display: grid;
+  grid-template-columns: 40% 60%;
+  width: 70%;
+  margin: auto;
+  margin-top: 6rem;
+  gap: 3vw;
+}
+
+@media (max-width: 768px) {
+  .home-section {
+    grid-template-columns: 1fr;
+  }
+}
+
+.home-content {
+  color: orangered;
+  text-align: center;
+}
+
+.home-content span {
+  font-weight: lighter;
+  font-size: 1.4rem;
+}
+
+.home-img {
+  width: 100%;
+  height: 100%;
+}
+
+.home-img img {
+  height: 100%;
+  width: 100%;
+  object-fit: fill;
+}
+
+/* coins information section header */
+.list-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 10rem;
+  padding-top: 1rem;
+  padding-right: 1rem;
+  background-color: #2b2b2b;
+  height: 5vh;
+  border-radius: 0.5rem;
+  align-content: center;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  .list-container {
+    width: 80%;
+    margin: auto;
+  }
+}
+
+.list-container li {
+  color: white;
+  list-style: none;
+  font-weight: bolder;
+}
+
+/* coins information section */
+.coins-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 10rem;
+  padding-top: 1rem;
+  padding-left: 2.8rem;
+  padding-right: 0.5rem;
+  background-color: #2b2b2b;
+  height: 5vh;
+  border-radius: 0.5rem;
+  align-content: center;
+  margin-top: 1rem;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .coins-container {
+    width: 80%;
+    margin: auto;
+    margin-top: 1rem;
+  }
+}
+.coins-container a {
+  width: -moz-fit-content;
+  width: fit-content;
+  height: 4vh;
+  color: white;
+}
+
+.coins-container a img {
+  height: 100%;
+}
+
+.coins-img-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.coin-header h2 {
+  color: white;
+}
+
+.coin-header {
+  margin: auto;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-top: 4rem;
+}
+
+/* About Page Styles */
+.about-section {
+  color: white;
+  width: 70%;
+  margin: 4rem auto;
+  text-align: center;
+}
+
+.about-content {
+  background-color: #2b2828;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  margin-top: 2rem;
+}
+
+.features {
+  margin-top: 2rem;
+  text-align: left;
+}
+
+.features ul {
+  list-style: none;
+  padding-left: 1rem;
+}
+
+.features li {
+  margin: 0.5rem 0;
+}
+
+/* Coin Info Page Styles */
+.coin-info-container {
+  color: white;
+  width: 70%;
+  margin: 4rem auto;
+}
+
+.coin-info-header {
+  background-color: #1a1a1a;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.coin-info-header img {
+  width: 64px;
+  height: 64px;
+}
+
+.coin-info-header p {
+  color: #888;
+  margin-top: 0.5rem;
+}
+
+.coin-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.info-card {
+  background-color: #1a1a1a;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+}
+
+.info-card h3 {
+  margin-bottom: 1rem;
+  color: #f0f0f0;
+  border-bottom: 1px solid #333;
+  padding-bottom: 0.5rem;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.75rem 0;
+  font-size: 0.95rem;
+}
+
+.info-item span:first-child {
+  color: #888;
+}
+
+/* Not Found Page Styles */
+.not-found {
+  color: white;
+  text-align: center;
+  margin-top: 4rem;
+}
+
+.home-link {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 0.5rem 1rem;
+  background-color: orangered;
+  color: white;
+  border-radius: 0.5rem;
+  transition: background-color 0.3s;
+}
+
+.home-link:hover {
+  background-color: #cc3300;
+}
+
+/* Utility Classes */
+.positive {
+  color: #4caf50;
+}
+.negative {
+  color: #f44336;
+}
+.loading {
+  color: white;
+  text-align: center;
+  margin-top: 4rem;
+}
+.error {
+  color: #f44336;
+  text-align: center;
+  margin-top: 4rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .coin-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .coin-info-container,
+  .about-section {
+    width: 90%;
+  }
+}
