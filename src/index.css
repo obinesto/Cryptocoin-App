@@ -37,11 +37,12 @@ a {
 
 .sidebar {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   position: absolute;
   top: 10%;
   left: 2%;
-  width: 20%;
+  width: 87%;
+  height: 4vh;
   gap: 1rem;
   background-color: #2b2828;
   padding: 1rem;

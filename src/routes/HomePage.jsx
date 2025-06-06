@@ -25,7 +25,6 @@ const HomePage = () => {
     };
   }, []);
 
-
   useEffect(() => {
     axios
       .get(apiUrl)
@@ -42,7 +41,7 @@ const HomePage = () => {
     <>
       <div className="home-section">
         <div className="home-content">
-          <h1>BLOCK CHAIN WEB APP</h1>
+          <h1>CRYPTOCOIN APP</h1>
           <span>A PLATFORM WHERE</span>
           <br />
           <span>
@@ -63,8 +62,12 @@ const HomePage = () => {
         <li>#</li>
         <li>Coin</li>
         <li>Price</li>
-        <li style={{ display: isMobile ? "none" : "block" }}>24h</li>
-        <li style={{ display: isMobile ? "none" : "block" }}>Volume</li>
+        {!isMobile && (
+          <>
+            <li>24h</li>
+            <li>Volume</li>
+          </>
+        )}
         <li>Mrkt Cap</li>
       </ul>
       <div>
@@ -80,8 +83,12 @@ const HomePage = () => {
               <img src={data.image} alt={`${data.id} logo`}></img>
             </Link>
             <div>{data.current_price}</div>
-            <div style={{ display: isMobile ? "none" : "block" }}>{data.price_change_percentage_24h}</div>
-            <div style={{ display: isMobile ? "none" : "block" }}>{data.total_volume}</div>
+            <div style={{ display: isMobile ? "none" : "block" }}>
+              {data.price_change_percentage_24h}
+            </div>
+            <div style={{ display: isMobile ? "none" : "block" }}>
+              {data.total_volume}
+            </div>
             <div>{data.market_cap}</div>
           </div>
         ))}
