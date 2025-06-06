@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import Image from "../assets/pexels-jonathanborba-14354113.jpg";
+import Image from "../../public/assets/pexels-jonathanborba-14354113.jpg";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
