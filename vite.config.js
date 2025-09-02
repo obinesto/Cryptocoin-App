@@ -7,7 +7,10 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'pwa-maskable-icon-512x512.png'],
+      pwaAssets: {
+        image: 'public/assets/pwa-maskable-icon-512x512.png',
+        preset: 'minimal-2023'
+      },
       manifest: {
         name: 'Cryptocoin App',
         short_name: 'CryptoCoin',
@@ -17,24 +20,6 @@ export default defineConfig({
         display: 'standalone',
         scope: '/',
         start_url: '/',
-        icons: [
-          {
-            src: 'pwa-192x192.png',
-            sizes: '192x192',
-            type: 'image/png'
-          },
-          {
-            src: 'pwa-512x512.png',
-            sizes: '512x512',
-            type: 'image/png'
-          },
-          {
-            src: 'pwa-maskable-icon-512x512.png',
-            sizes: '512x512',
-            type: 'image/png',
-            purpose: 'any maskable'
-          }
-        ]
       }
     })
   ]
