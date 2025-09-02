@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
+import { FaRegArrowAltCircleLeft } from "react-icons/fa";
 import axios from "axios";
 
 const CoinInfoPage = () => {
@@ -28,25 +29,30 @@ const CoinInfoPage = () => {
   if (!coinData) return <div className="error">Coin not found</div>;
 
   const formatDate = (dateString) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
+    return new Date(dateString).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
     });
   };
 
   const formatNumber = (num) => {
-    return new Intl.NumberFormat('en-US').format(num);
+    return new Intl.NumberFormat("en-US").format(num);
   };
 
   return (
     <div className="coin-info-container">
+      <Link to="/" title="back to home page" className="back-home">
+        <FaRegArrowAltCircleLeft color="white" />
+      </Link>
       <div className="coin-info-header">
         <img src={coinData.image} alt={`${coinData.name} logo`} />
         <div>
-          <h1>{coinData.name} ({coinData.symbol.toUpperCase()})</h1>
+          <h1>
+            {coinData.name} ({coinData.symbol.toUpperCase()})
+          </h1>
           <p>Rank #{coinData.market_cap_rank}</p>
         </div>
       </div>
@@ -68,7 +74,13 @@ const CoinInfoPage = () => {
           </div>
           <div className="info-item">
             <span>24h Change:</span>
-            <span className={coinData.price_change_percentage_24h > 0 ? "positive" : "negative"}>
+            <span
+              className={
+                coinData.price_change_percentage_24h > 0
+                  ? "positive"
+                  : "negative"
+              }
+            >
               {coinData.price_change_percentage_24h.toFixed(2)}%
             </span>
           </div>
@@ -86,11 +98,17 @@ const CoinInfoPage = () => {
           </div>
           <div className="info-item">
             <span>Circulating Supply:</span>
-            <span>{formatNumber(coinData.circulating_supply)} {coinData.symbol.toUpperCase()}</span>
+            <span>
+              {formatNumber(coinData.circulating_supply)}{" "}
+              {coinData.symbol.toUpperCase()}
+            </span>
           </div>
           <div className="info-item">
             <span>Total Supply:</span>
-            <span>{formatNumber(coinData.total_supply)} {coinData.symbol.toUpperCase()}</span>
+            <span>
+              {formatNumber(coinData.total_supply)}{" "}
+              {coinData.symbol.toUpperCase()}
+            </span>
           </div>
         </div>
 
@@ -122,7 +140,13 @@ const CoinInfoPage = () => {
           </div>
           <div className="info-item">
             <span>Market Cap Change 24h:</span>
-            <span className={coinData.market_cap_change_percentage_24h > 0 ? "positive" : "negative"}>
+            <span
+              className={
+                coinData.market_cap_change_percentage_24h > 0
+                  ? "positive"
+                  : "negative"
+              }
+            >
               {coinData.market_cap_change_percentage_24h.toFixed(2)}%
             </span>
           </div>
