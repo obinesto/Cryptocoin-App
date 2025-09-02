@@ -1,70 +1,87 @@
-# Cryptocoin App
+# 🚀 CryptoCoin - Real-Time Cryptocurrency Tracker
 
-The Cryptocoin App is a web application built with React and Vite that displays up-to-date information about various cryptocurrencies. Users can view a list of coins, their current prices, market capitalization, trading volume and more.
+![CryptoCoin App Preview](/public/assets/preview.png)
 
-## Features
+CryptoCoin is a modern, responsive web application that offers a native app experirnce (PWA) and provides real-time cryptocurrency market data at your fingertips. Built with React and powered by Vite, it offers a seamless experience for tracking your favorite cryptocurrencies.
 
-- **Cryptocurrency Listings:** View a list of authorized cryptocurrencies with key metrics.
-- **Real-time Data:** Displays current price, 24-hour price change percentage, total trading volume, and market capitalization.
-- **Detailed Coin View:** Click on a coin to navigate to a dedicated page with more comprehensive information.
-- **Responsive Design:** Adapts for optimal viewing on both desktop and mobile devices.
-- **User-Friendly Navigation:** Easy-to-use navigation bar to switch between pages.
+## ✨ Key Features
 
-## Tech Stack
+- 📊 **Live Market Data**: Real-time cryptocurrency prices, market caps, and trading volumes
+- 📱 **Responsive Design**: Optimized viewing experience across all devices
+- 📈 **Detailed Analytics**: Comprehensive statistics including 24h changes, ATH/ATL data
+- 🔍 **In-depth Information**: Detailed view for each cryptocurrency
+- ⚡ **Fast Performance**: Built with Vite for lightning-fast load times
+- 🎨 **Modern UI**: Clean and intuitive interface with dark mode
 
-- **Frontend:** React, Vite
-- **Routing:** React Router DOM
-- **HTTP Client:** Axios
-- **Styling:** CSS
-- **Language:** JavaScript (JSX)
+## 🛠️ Built With
 
-## Getting Started
+- **Frontend Framework**: [React](https://reactjs.org/) 18.3.1
+- **Build Tool**: [Vite](https://vitejs.dev/) 6.3.5
+- **Routing**: [React Router DOM](https://reactrouter.com/) 6.27.0
+- **HTTP Client**: [Axios](https://axios-http.com/) 1.7.5
+- **Icons**: [React Icons](https://react-icons.github.io/react-icons/) 5.2.1
+- **Styling**: Custom CSS with responsive design
 
-Follow these instructions to get a copy of the project up and running on your local machine for development and testing purposes.
+## 🚀 Quick Start
 
 ### Prerequisites
 
-- Node.js (which includes npm) installed on your machine.
+- Node.js (latest LTS version recommended)
+- npm or yarn package manager
 
-### Installation
+### Installation Steps
 
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/your-username/Cryptocoin-App.git
-    cd Cryptocoin-App
-    ```
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/obinesto/Cryptocoin-App.git
+   cd Cryptocoin-App
+   ```
 
-2.  **Install dependencies:**
-    Using npm:
-    ```bash
-    npm install
-    ```
-    Or using yarn:
-    ```bash
-    yarn install
-    ```
+2. Install dependencies:
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
 
-3.  **Set up environment variables:**
-    Create a `.env` file in the root directory of the project and add your API URL. The application expects the API endpoint to be available via `VITE_API_URL`.
-    ```env
-    VITE_API_URL=your_cryptocurrency_api_endpoint_here
-    ```
+3. Set up environment variables:
+   Create a `.env` file in the root directory:
+   ```env
+   VITE_API_URL=your_cryptocurrency_api_endpoint
+   ```
 
-4.  **Run the development server:**
-    ```bash
-    npm run dev
-    ```
-    Or using yarn:
-    ```bash
-    yarn dev
-    ```
-    This will start the Vite development server, typically at `http://localhost:5173`. Open this URL in your browser to see the application.
+4. Start the development server:
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
+
+5. Open [http://localhost:5173](http://localhost:5173) in your browser
+
+## 🔧 Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+- `npm run lint` - Run ESLint checks
+
+```
+
+## 🤝 Contributing
+
+Contributions are welcome! Feel free to submit a Pull Request.
+
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
 
 ---
 
-This project was bootstrapped with Vite. The original Vite README content regarding plugins is below for reference if needed:
-
-Currently, two official React plugins are available:
-
--   @vitejs/plugin-react uses Babel for Fast Refresh
--   @vitejs/plugin-react-swc uses SWC for Fast Refresh
+Made with ❤️ by [Obinesto](https://github.com/obinesto)
