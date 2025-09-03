@@ -15,11 +15,11 @@ CryptoCoin is a modern, responsive web application that offers a native app expe
 
 ## 🛠️ Built With
 
-- **Frontend Framework**: [React](https://reactjs.org/) 18.3.1
+- **Frontend Framework**: [React](https://reactjs.org/)
 - **Build Tool**: [Vite](https://vitejs.dev/) 6.3.5
-- **Routing**: [React Router DOM](https://reactrouter.com/) 6.27.0
-- **HTTP Client**: [Axios](https://axios-http.com/) 1.7.5
-- **Icons**: [React Icons](https://react-icons.github.io/react-icons/) 5.2.1
+- **Routing**: [React Router DOM](https://reactrouter.com/)
+- **HTTP Client**: [Axios](https://axios-http.com/)
+- **Icons**: [React Icons](https://react-icons.github.io/react-icons/)
 - **Styling**: Custom CSS with responsive design
 
 ## 🚀 Quick Start
