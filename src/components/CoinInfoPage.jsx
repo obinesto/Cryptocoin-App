@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { FaRegArrowAltCircleLeft } from "react-icons/fa";
+import { FaRegArrowAltCircleLeft, FaArrowDown } from "react-icons/fa";
 import axios from "axios";
 
 const CoinInfoPage = () => {
   const { id } = useParams();
   const [coinData, setCoinData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
   const apiUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
@@ -25,6 +27,29 @@ const CoinInfoPage = () => {
     fetchCoinData();
   }, [id, apiUrl]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handler = (e) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+    };
+
+    window.addEventListener("beforeinstallprompt", handler);
+
+    return () => {
+      window.removeEventListener("beforeinstallprompt", handler);
+    };
+  }, []);
+
   if (loading) return <div className="loading">Loading...</div>;
   if (!coinData) return <div className="error">Coin not found</div>;
 
@@ -40,6 +65,14 @@ const CoinInfoPage = () => {
 
   const formatNumber = (num) => {
     return new Intl.NumberFormat("en-US").format(num);
+  };
+
+  const handleInstallClick = async () => {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    console.log(`User response to the install prompt: ${outcome}`);
+    setDeferredPrompt(null);
   };
 
   return (
@@ -152,6 +185,37 @@ const CoinInfoPage = () => {
           </div>
         </div>
       </div>
+
+      {isMobile && deferredPrompt && (
+        <div
+          style={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "2rem",
+          }}
+        >
+          <button
+            type="button"
+            title="install button"
+            onClick={handleInstallClick}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: ".5rem",
+              height: "30px",
+              backgroundColor: "#2b2b2b",
+              color: "white",
+              borderRadius: "4px",
+              borderWidth: "0px",
+              cursor: "pointer",
+            }}
+          >
+            <span>Install for easy access</span>
+            <FaArrowDown color="orangered" />
+          </button>
+        </div>
+      )}
     </div>
   );
 };

@@ -6,7 +6,12 @@ html {
 
 body {
   background: black;
-  font-family: "Annie Use Your Telescope", cursive;
+  font-family: "Annie Use Your Telescope", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", system-ui, Roboto, Oxygen-Sans, Ubuntu, Cantarell,
+    "Helvetica Neue", sans-serif;
+  /* uncomment below to overide browser default refresh on pull */
+  /* -webkit-overscroll-behavior-y: contain; 
+  overscroll-behavior-y: contain; */
 }
 
 a {
@@ -79,7 +84,7 @@ a {
 }
 
 /* home content section */
-.home-section {
+.home-section-one {
   display: grid;
   grid-template-columns: 40% 60%;
   width: 70%;
@@ -89,7 +94,7 @@ a {
 }
 
 @media (max-width: 768px) {
-  .home-section {
+  .home-section-one {
     grid-template-columns: 1fr;
   }
 }
@@ -116,40 +121,56 @@ a {
 }
 
 /* coins information section header */
-.list-container {
+.coin-header {
+  margin: auto;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-top: 4rem;
+}
+.coin-header h2 {
+  color: white;
+}
+
+/* coins information section */
+.coin-display-table {
+  width: 100%;
+}
+
+.coin-display-table-head {
+  width: 100%;
+}
+
+.coin-display-table-row {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin: 0 10rem;
-  padding-top: 1rem;
   padding-right: 1rem;
+  padding-left: 1rem;
   background-color: #2b2b2b;
   height: 5vh;
   border-radius: 0.5rem;
   align-content: center;
   margin-bottom: 2rem;
-}
-
-@media (max-width: 768px) {
-  .list-container {
-    width: 80%;
-    margin: auto;
-  }
-}
-
-.list-container li {
   color: white;
   list-style: none;
   font-weight: bolder;
 }
 
-/* coins information section */
-.coins-container {
+@media (max-width: 768px) {
+  .coin-display-table-row {
+    width: 80%;
+    margin: auto;
+  }
+}
+
+.coins-display-tbody-tr {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin: 0 10rem;
-  padding-top: 1rem;
-  padding-left: 2.8rem;
-  padding-right: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
   background-color: #2b2b2b;
   height: 5vh;
   border-radius: 0.5rem;
@@ -159,38 +180,27 @@ a {
 }
 
 @media (max-width: 768px) {
-  .coins-container {
+  .coins-display-tbody-tr {
     width: 80%;
     margin: auto;
     margin-top: 1rem;
   }
 }
-.coins-container a {
+.coins-display-tbody-tr a {
   width: -moz-fit-content;
   width: fit-content;
   height: 4vh;
   color: white;
 }
 
-.coins-container a img {
-  height: 100%;
+.coins-display-tbody-tr a img {
+  height: 60%;
 }
 
 .coins-img-container {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-}
-
-.coin-header h2 {
-  color: white;
-}
-
-.coin-header {
-  margin: auto;
-  width: -moz-fit-content;
-  width: fit-content;
-  margin-top: 4rem;
 }
 
 /* About Page Styles */
@@ -236,7 +246,7 @@ a {
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin-top: .5rem;
+  margin-top: 0.5rem;
 }
 
 .coin-info-header img {
@@ -280,7 +290,7 @@ a {
   color: #888;
 }
 
-.back-home{
+.back-home {
   display: flex;
   align-items: center;
   justify-content: center;

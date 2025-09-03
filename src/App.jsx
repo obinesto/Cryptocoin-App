@@ -1,9 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Nav from "./components/Nav.jsx";
-import HomePage from "./routes/HomePage.jsx";
-import AboutPage from "./routes/AboutPage.jsx";
-import CoinInfoPage from "./routes/CoinInfoPage.jsx";
-import NotFound from "./routes/NotFound.jsx";
+import HomePage from "./components/HomePage.jsx";
+import AboutPage from "./components/AboutPage.jsx";
+import CoinInfoPage from "./components/CoinInfoPage.jsx";
+import NotFound from "./components/NotFound.jsx";
 
 function App() {
   return (
