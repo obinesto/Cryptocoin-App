@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { BiSolidUpArrow, BiSolidDownArrow } from "react-icons/bi";
 import axios from "axios";
-import Image from "../../public/assets/pexels-jonathanborba.jpg";
+import Image from "/assets/pexels-jonathanborba.jpg";
 
 const item_per_page = 20;
 const no_of_pages = 10;

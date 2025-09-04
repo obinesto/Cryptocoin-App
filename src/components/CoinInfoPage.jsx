@@ -186,7 +186,7 @@ const CoinInfoPage = () => {
         </div>
       </div>
 
-      {isMobile && deferredPrompt && (
+      {isMobile && (
         <div
           style={{
             width: "100%",
