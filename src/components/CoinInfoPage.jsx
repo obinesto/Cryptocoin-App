@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { FaRegArrowAltCircleLeft, FaArrowDown } from "react-icons/fa";
 import axios from "axios";
+import { usePwa } from "./PwaProvider";
 
 const CoinInfoPage = () => {
   const { id } = useParams();
   const [coinData, setCoinData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-  const [deferredPrompt, setDeferredPrompt] = useState(null);
   const apiUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
@@ -37,18 +37,7 @@ const CoinInfoPage = () => {
     };
   }, []);
 
-  useEffect(() => {
-    const handler = (e) => {
-      e.preventDefault();
-      setDeferredPrompt(e);
-    };
-
-    window.addEventListener("beforeinstallprompt", handler);
-
-    return () => {
-      window.removeEventListener("beforeinstallprompt", handler);
-    };
-  }, []);
+  const { deferredPrompt, installPwa } = usePwa();
 
   if (loading) return <div className="loading">Loading...</div>;
   if (!coinData) return <div className="error">Coin not found</div>;
@@ -65,14 +54,6 @@ const CoinInfoPage = () => {
 
   const formatNumber = (num) => {
     return new Intl.NumberFormat("en-US").format(num);
-  };
-
-  const handleInstallClick = async () => {
-    if (!deferredPrompt) return;
-    deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
-    console.log(`User response to the install prompt: ${outcome}`);
-    setDeferredPrompt(null);
   };
 
   return (
@@ -198,7 +179,7 @@ const CoinInfoPage = () => {
           <button
             type="button"
             title="install button"
-            onClick={handleInstallClick}
+            onClick={installPwa}
             style={{
               display: "flex",
               alignItems: "center",
