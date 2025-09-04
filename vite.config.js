@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
-      registerType: "prompt",
+      registerType: "autoUpdate",
       devOptions: {
         enabled: true,
       },
@@ -34,7 +34,7 @@ export default defineConfig({
         name: "Cryptocoin App",
         short_name: "CryptoCoin",
         description: "Application for tracking cryptocurrency information",
-        theme_color: "#ffffff",
+        theme_color: "#000000",
         background_color: "#ffffff",
         display: "standalone",
         scope: "/",
