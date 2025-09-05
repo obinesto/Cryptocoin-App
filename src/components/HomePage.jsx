@@ -80,8 +80,12 @@ const HomePage = () => {
             <th>Coin</th>
             <th>$Price</th>
             <th>24h%</th>
-            {!isMobile && <th>$Volume</th>}
-            <th>$Mrkt Cap</th>
+            {!isMobile && (
+              <>
+                <th>$Volume</th>
+                <th>$Mrkt Cap</th>
+              </>
+            )}
           </tr>
         </thead>
         <tbody>
@@ -111,8 +115,12 @@ const HomePage = () => {
                 )}
                 {data.price_change_percentage_24h}%
               </td>
-              {!isMobile && <td>${data.total_volume}</td>}
-              <td>${data.market_cap}</td>
+              {!isMobile && (
+                <>
+                  <td>${data.total_volume}</td>
+                  <td>${data.market_cap}</td>
+                </>
+              )}
             </tr>
           ))}
         </tbody>
