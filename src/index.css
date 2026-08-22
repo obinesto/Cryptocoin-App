@@ -339,6 +339,22 @@ a {
   margin-top: 4rem;
 }
 
+.error-page {
+  color: white;
+  text-align: center;
+  margin: 4rem auto;
+}
+
+.error-page button,
+.coin-display-table button {
+  background-color: orangered;
+  border: 0;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  padding: 0.4rem 0.75rem;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .coin-info-grid {

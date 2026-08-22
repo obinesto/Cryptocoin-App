@@ -13,6 +13,10 @@ const HomePage = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
+  const [loadError, setLoadError] = useState(false);
+  const [hasLoaded, setHasLoaded] = useState(false);
+  const [hasMoreCoins, setHasMoreCoins] = useState(true);
+  const [retryKey, setRetryKey] = useState(0);
   const truncateText = (text, maxLength) => {
     if (text.length > maxLength) {
       return text.slice(0, maxLength) + "...";
@@ -31,25 +35,55 @@ const HomePage = () => {
   }, []);
 
   useEffect(() => {
+    const controller = new AbortController();
+
     setIsLoading(true);
-    axios
-      .get(
-        `${apiUrl}&per_page=${item_per_page}&page=${currentPage}&sparkline=false`
-      )
-      .then(async (res) => {
-        const data = await res.data;
-        if (currentPage === 1) {
-          setCoins(data);
-        } else {
-          setCoins((prevCoins) => [...prevCoins, ...data]);
+    setLoadError(false);
+
+    const fetchCoins = async () => {
+      try {
+        const response = await axios.get(
+          `${apiUrl}&per_page=${item_per_page}&page=${currentPage}&sparkline=false`,
+          { signal: controller.signal },
+        );
+
+        if (!Array.isArray(response.data)) {
+          throw new Error("The coin service returned an unexpected response.");
         }
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        setIsLoading(false);
-      });
-  }, [currentPage]);
+
+        const coinResults = response.data.filter(
+          (coin) => coin && typeof coin.id === "string",
+        );
+
+        setCoins((previousCoins) =>
+          currentPage === 1
+            ? coinResults
+            : [...previousCoins, ...coinResults],
+        );
+        setHasMoreCoins(response.data.length === item_per_page);
+      } catch (error) {
+        if (!axios.isCancel(error)) {
+          console.error("Could not load coins.", error);
+          setLoadError(true);
+        }
+      } finally {
+        if (!controller.signal.aborted) {
+          setIsLoading(false);
+          setHasLoaded(true);
+        }
+      }
+    };
+
+    fetchCoins();
+
+    return () => controller.abort();
+  }, [currentPage, retryKey]);
+
+  const retryLoadingCoins = () => {
+    setRetryKey((key) => key + 1);
+  };
+
+  const columnCount = isMobile ? 4 : 6;
 
   return (
     <>
@@ -89,43 +123,66 @@ const HomePage = () => {
           </tr>
         </thead>
         <tbody>
-          {coins.map((data, index) => (
-            <tr
-              key={data.id}
-              className="coins-display-tbody-tr"
-              id="auth-coins"
-            >
-              <td>{index + 1}</td>
-              <td>
-                <Link
-                  className="coins-img-container"
-                  to={`/coin/${data.id}`}
-                  title={`View details for ${data.id}`}
-                >
-                  <img src={data.image} alt={`${data.id} logo`} />
-                  <p>{truncateText(data.id, 10)}</p>
-                </Link>
-              </td>
-              <td>${data.current_price}</td>
-              <td style={{ display: "flex", alignItems: "center" }}>
-                {data.price_change_percentage_24h > 0 ? (
-                  <BiSolidUpArrow color="green" />
-                ) : (
-                  <BiSolidDownArrow color="red" />
-                )}
-                {data.price_change_percentage_24h}%
-              </td>
-              {!isMobile && (
-                <>
-                  <td>${data.total_volume}</td>
-                  <td>${data.market_cap}</td>
-                </>
-              )}
+          {isLoading && coins.length === 0 && (
+            <tr>
+              <td colSpan={columnCount}>Loading authorized coins...</td>
             </tr>
-          ))}
+          )}
+          {loadError && coins.length === 0 && (
+            <tr>
+              <td colSpan={columnCount}>
+                <p>We could not load the authorized coins. Please try again.</p>
+                <button type="button" onClick={retryLoadingCoins}>
+                  Try again
+                </button>
+              </td>
+            </tr>
+          )}
+          {hasLoaded && !isLoading && !loadError && coins.length === 0 && (
+            <tr>
+              <td colSpan={columnCount}>No authorized coins are available.</td>
+            </tr>
+          )}
+          {coins.map((data, index) => (
+              <tr
+                key={data.id}
+                className="coins-display-tbody-tr"
+                id="auth-coins"
+              >
+                <td>{index + 1}</td>
+                <td>
+                  <Link
+                    className="coins-img-container"
+                    to={`/coin/${data.id}`}
+                    title={`View details for ${data.id}`}
+                  >
+                    <img src={data.image} alt={`${data.id} logo`} />
+                    <p>{truncateText(data.id, 10)}</p>
+                  </Link>
+                </td>
+                <td>${data.current_price}</td>
+                <td style={{ display: "flex", alignItems: "center" }}>
+                  {data.price_change_percentage_24h > 0 ? (
+                    <BiSolidUpArrow color="green" />
+                  ) : (
+                    <BiSolidDownArrow color="red" />
+                  )}
+                  {data.price_change_percentage_24h}%
+                </td>
+                {!isMobile && (
+                  <>
+                    <td>${data.total_volume}</td>
+                    <td>${data.market_cap}</td>
+                  </>
+                )}
+              </tr>
+            ))}
         </tbody>
       </table>
-      {currentPage < no_of_pages && (
+      {coins.length > 0 &&
+        !loadError &&
+        hasMoreCoins &&
+        currentPage < no_of_pages && (
         <div
           style={{
             width: "100%",
@@ -152,6 +209,17 @@ const HomePage = () => {
             }}
           >
             {isLoading && currentPage > 1 ? "Loading..." : "Load More"}
+          </button>
+        </div>
+      )}
+      {loadError && coins.length > 0 && (
+        <div
+          role="alert"
+          style={{ display: "flex", justifyContent: "center", gap: ".5rem" }}
+        >
+          <span>More coins could not be loaded.</span>
+          <button type="button" onClick={retryLoadingCoins}>
+            Try again
           </button>
         </div>
       )}

@@ -8,24 +8,43 @@ const CoinInfoPage = () => {
   const { id } = useParams();
   const [coinData, setCoinData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState(false);
+  const [retryKey, setRetryKey] = useState(0);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const apiUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
+    const controller = new AbortController();
+
     const fetchCoinData = async () => {
+      setLoading(true);
+      setLoadError(false);
+
       try {
-        const response = await axios.get(apiUrl);
-        const coinData = response.data.find((coin) => coin.id === id);
-        setCoinData(coinData);
-        setLoading(false);
+        const response = await axios.get(apiUrl, { signal: controller.signal });
+
+        if (!Array.isArray(response.data)) {
+          throw new Error("The coin service returned an unexpected response.");
+        }
+
+        setCoinData(response.data.find((coin) => coin.id === id) ?? null);
       } catch (error) {
-        console.error("Error fetching coin data:", error);
-        setLoading(false);
+        if (!axios.isCancel(error)) {
+          console.error("Could not load coin details.", error);
+          setCoinData(null);
+          setLoadError(true);
+        }
+      } finally {
+        if (!controller.signal.aborted) {
+          setLoading(false);
+        }
       }
     };
 
     fetchCoinData();
-  }, [id, apiUrl]);
+
+    return () => controller.abort();
+  }, [id, apiUrl, retryKey]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -40,6 +59,19 @@ const CoinInfoPage = () => {
   const { deferredPrompt, installPwa } = usePwa();
 
   if (loading) return <div className="loading">Loading...</div>;
+  if (loadError) {
+    return (
+      <div className="error">
+        <p>We could not load this coin. Please try again.</p>
+        <button type="button" onClick={() => setRetryKey((key) => key + 1)}>
+          Try again
+        </button>
+        <Link to="/" className="home-link">
+          Return home
+        </Link>
+      </div>
+    );
+  }
   if (!coinData) return <div className="error">Coin not found</div>;
 
   const formatDate = (dateString) => {
@@ -53,7 +85,13 @@ const CoinInfoPage = () => {
   };
 
   const formatNumber = (num) => {
+    if (!Number.isFinite(num)) return "—";
+
     return new Intl.NumberFormat("en-US").format(num);
+  };
+
+  const formatPercentage = (percentage) => {
+    return Number.isFinite(percentage) ? `${percentage.toFixed(2)}%` : "—";
   };
 
   return (
@@ -65,7 +103,7 @@ const CoinInfoPage = () => {
         <img src={coinData.image} alt={`${coinData.name} logo`} />
         <div>
           <h1>
-            {coinData.name} ({coinData.symbol.toUpperCase()})
+            {coinData.name} ({coinData.symbol?.toUpperCase() ?? "—"})
           </h1>
           <p>Rank #{coinData.market_cap_rank}</p>
         </div>
@@ -95,7 +133,7 @@ const CoinInfoPage = () => {
                   : "negative"
               }
             >
-              {coinData.price_change_percentage_24h.toFixed(2)}%
+              {formatPercentage(coinData.price_change_percentage_24h)}
             </span>
           </div>
         </div>
@@ -114,14 +152,14 @@ const CoinInfoPage = () => {
             <span>Circulating Supply:</span>
             <span>
               {formatNumber(coinData.circulating_supply)}{" "}
-              {coinData.symbol.toUpperCase()}
+              {coinData.symbol?.toUpperCase() ?? "—"}
             </span>
           </div>
           <div className="info-item">
             <span>Total Supply:</span>
             <span>
               {formatNumber(coinData.total_supply)}{" "}
-              {coinData.symbol.toUpperCase()}
+              {coinData.symbol?.toUpperCase() ?? "—"}
             </span>
           </div>
         </div>
@@ -161,7 +199,7 @@ const CoinInfoPage = () => {
                   : "negative"
               }
             >
-              {coinData.market_cap_change_percentage_24h.toFixed(2)}%
+              {formatPercentage(coinData.market_cap_change_percentage_24h)}
             </span>
           </div>
         </div>
